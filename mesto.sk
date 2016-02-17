@@ -1,0 +1,134 @@
+command /starosta <text> <text> <text>:
+  usage: "/starosta <sever, jih, vychod, zapad> <add, remove> <jmeno hrace>"
+  trigger:
+    if player is "GoodmanSIG":
+      if arg 1 is "sever":
+        if arg 2 is "add":
+          set {mesto.starosta.sever} to arg 3
+          message "&2Hrac &a%arg 3% &2je zvolen starostou &6[&eSever&6]"
+        if arg 2 is "remove":
+          delete {mesto.starosta.sever}
+          message "&2Hrac &a%arg 3% &2jiz neni starostou &6[&eSever&6]"
+
+      if arg 1 is "jih":
+        if arg 2 is "add":
+          set {mesto.starosta.jih} to arg 3
+          message "&2Hrac &a%arg 3% &2je zvolen starostou &6[&eJih&6]"
+        if arg 2 is "remove":
+          delete {mesto.starosta.jih}
+          message "&2Hrac &a%arg 3% &2jiz neni starostou &6[&eJih&6]"
+
+      if arg 1 is "vychod":
+        if arg 2 is "add":
+          set {mesto.starosta.vychod} to arg 3
+          message "&2Hrac &a%arg 3% &2je zvolen starostou &6[&eVychod&6]"
+        if arg 2 is "remove":
+          delete {mesto.starosta.vychod}
+          message "&2Hrac &a%arg 3% &2jiz neni starostou &6[&eVychod&6]"
+
+      if arg 1 is "zapad":
+        if arg 2 is "add":
+          set {mesto.starosta.zapad} to arg 3
+          message "&2Hrac &a%arg 3% &2je zvolen starostou &6[&eZapad&6]"
+        if arg 2 is "remove":
+          delete {mesto.starosta.zapad}
+          message "&2Hrac &a%arg 3% &2jiz neni starostou &6[&eZapad&6]"
+    else:
+      message "&aNejses superstarosta."
+
+    
+command /mesto:
+  trigger:
+    message "&6-------- &aStarostove mest &6--------" 
+    if {mesto.starosta.sever} is set:
+      message "&aSever: &6%{mesto.starosta.sever}%" 
+    else:
+      message "&aSever: &6bez starosty"  
+
+    if {mesto.starosta.jih} is set:
+      message "&aJih: &6%{mesto.starosta.jih}%" 
+    else:
+      message "&aJih: &6bez starosty"  
+
+    if {mesto.starosta.vychod} is set:
+      message "&aVychod: &6%{mesto.starosta.vychod}%" 
+    else:
+      message "&aVychod: &6bez starosty"  
+
+    if {mesto.starosta.zapad} is set:
+      message "&aZapad: &6%{mesto.starosta.zapad}%" 
+    else:
+      message "&aZapad: &6bez starosty" 
+    message "&6-------------------------------"  
+
+
+command /obcan <text> <text> <text>:
+  usage: "/obcan <sever, jih, vychod, zapad> <add, remove> <jmeno hrace>"
+  trigger:
+    if arg 1 is "sever":                                                              
+      if player is {mesto.starosta.sever}:                                            
+        if arg 2 is "add":                                                            
+          if {mesto.smer.%arg 3%} is set:                                             
+            broadcast "&2Hrac &a%arg 3% &2je clenem: &6[&e%{mesto.smer.%arg 3%}%&6]" 
+          else:
+            set {mesto.smer.%player%} to "S"
+            broadcast "&2Hrac &a%arg 3% &2byl pridan do vaseho mesta."                
+        if arg 2 is "remove":                                                         
+          if {mesto.smer.%arg 3%} is "S":
+            delete {mesto.smer.%arg 3%}                                               
+            broadcast "&2Hrac &a%player% &2byl vyhosten z mesta."                     
+          else:
+            broadcast "&2Hrac &a%arg 3% &2neni clenem mesta &a%arg 1%."               
+      else:
+        broadcast "&2Nejses starosta mesta sever."                                           
+
+    if arg 1 is "jih":                                                              
+      if player is {mesto.starosta.jih}:                                            
+        if arg 2 is "add":                                                            
+          if {mesto.smer.%arg 3%} is set:                                             
+            broadcast "&2Hrac &a%arg 3% &2je clenem: &6[&e%{mesto.smer.%arg 3%}%&6]" 
+          else:
+            set {mesto.smer.%player%} to "J"
+            broadcast "&2Hrac &a%arg 3% &2byl pridan do vaseho mesta."                
+        if arg 2 is "remove":                                                         
+          if {mesto.smer.%arg 3%} is "J":
+            delete {mesto.smer.%arg 3%}                                               
+            broadcast "&2Hrac &a%arg 3% &2byl vyhosten z mesta."                     
+          else:
+            broadcast "&2Hrac &a%arg 3% &2neni clenem mesta &a%arg 1%."               
+      else:
+        broadcast "&2Nejses starosta mesta jih."                                           
+
+    if arg 1 is "vychod":                                                              
+      if player is {mesto.starosta.vychod}:                                            
+        if arg 2 is "add":                                                            
+          if {mesto.smer.%arg 3%} is set:                                             
+            broadcast "&2Hrac &a%arg 3% &2je clenem: &6[&e%{mesto.smer.%arg 3%}%&6]" 
+          else:
+            set {mesto.smer.%player%} to "V"
+            broadcast "&2Hrac &a%arg 3% &2byl pridan do vaseho mesta."                
+        if arg 2 is "remove":                                                         
+          if {mesto.smer.%arg 3%} is "V":
+            delete {mesto.smer.%arg 3%}                                               
+            broadcast "&2Hrac &a%arg 3% &2byl vyhosten z mesta."                     
+          else:
+            broadcast "&2Hrac &a%arg 3% &2neni clenem mesta &a%arg 1%."               
+      else:
+        broadcast "&2Nejses starosta mesta vychod."                                           
+
+    if arg 1 is "zapad":                                                              
+      if player is {mesto.starosta.zapad}:                                            
+        if arg 2 is "add":                                                            
+          if {mesto.smer.%arg 3%} is set:                                             
+            broadcast "&2Hrac &a%arg 3% &2je clenem: &6[&e%{mesto.smer.%arg 3%}%&6]" 
+          else:
+            set {mesto.smer.%player%} to "Z"
+            broadcast "&2Hrac &a%arg 3% &2byl pridan do vaseho mesta."                
+        if arg 2 is "remove":                                                         
+          if {mesto.smer.%arg 3%} is "Z":
+            delete {mesto.smer.%arg 3%}                                               
+            broadcast "&2Hrac &a%player% &2byl vyhosten z mesta."                     
+          else:
+            broadcast "&2Hrac &a%arg 3% &2neni clenem mesta &a%arg 1%."               
+      else:
+        broadcast "&2Nejses starosta mesta zapad."  
