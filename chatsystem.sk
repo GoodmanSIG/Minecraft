@@ -1,0 +1,27 @@
+on chat:
+  if {chat.local.%player%} is set:
+    if {chat.server.%player%} is "1":
+      message "Splneno"
+    if {chat.info.%player%} is "1":
+      message "Splneno"
+    if {chat.event.%player%} is "1":
+      message "Splneno"
+    else:
+      messsage "Nemas nastaveny chat"
+  else:
+    if {mesto.smer.%player%} is set:
+      if the player has the permission "rank.vip":   
+        cancel event
+        broadcast "&6[&e%{mesto.smer.%player%}%&6] %colored player's prefix%%colored player's suffix% &dVIP %colored player's prefix%%player's display name%: &f%message%"
+        stop
+      else:
+        cancel event
+        broadcast "&6[&e%{mesto.smer.%player%}%&6] %colored player's prefix%%colored player's suffix% %colored player's prefix%%player's display name%: &f%message%"
+    else:  
+      if the player has the permission "rank.vip":
+        cancel event
+        broadcast "%colored player's prefix%%colored player's suffix% &dVIP %colored player's prefix%%player's display name%: &f%message%"
+        stop
+      else:
+        cancel event
+        broadcast "&6%colored player's prefix%%colored player's suffix% %colored player's prefix%%player's display name%: &f%message%"
