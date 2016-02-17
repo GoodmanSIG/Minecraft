@@ -1,0 +1,72 @@
+command /hodnost:     
+  trigger: 
+    if player has permission "rank.permise.admin":
+      message "&6>> &eNemuzes pouzit danou funkci &6<<" 
+    else:                   
+      open chest with 1 rows named "%colored player's suffix% &8%player%"  to player
+      format slot 0 of player with 1 of Cobweb named " " to be unstealable
+      format slot 1 of player with 1 of Enchanted Book named "  &6&l>> &eHodnost &6&l<<" with lore "        &bTulak||      &2Dosazeno" to be unstealable
+      if player has permission "rank.permise.tulak":
+        if player has permission "rank.permise.obcan":
+          format slot 2 of player with 1 of Enchanted Book named "  &6&l>> &eHodnost &6&l<<" with lore "        &bObcan||      &2Dosazeno" to be unstealable 
+        else:
+          if player's money is greater than or equal to 1000:
+            format slot 2 of player with 1 of Book and Quill named "  &6&l>> &eHodnost &6&l<<" with lore "        &bObcan||       &a&lKoupit" to close then run "hodnostzvyseni %player% 50 Obcan"   
+          else:
+            format slot 2 of player with 1 of Book named "  &6&l>> &eHodnost &6&l<<" with lore "       &bObcan||    &aCena: &e1.000" to be unstealable 
+      else:
+        format slot 2 of player with 1 of Book named "  &6&l>> &eHodnost &6&l<<" with lore "       &bObcan||    &aCena: &e1.000" to be unstealable
+
+      if player has permission "rank.permise.obcan":
+        if player has permission "rank.permise.delnik":
+          format slot 3 of player with 1 of Enchanted Book named "  &6&l>> &eHodnost &6&l<<" with lore "        &bDelnik||      &2Dosazeno" to be unstealable 
+        else:
+          if player's money is greater than or equal to 5000:
+            format slot 3 of player with 1 of Book and Quill named "  &6&l>> &eHodnost &6&l<<" with lore "        &bDelnik||       &a&lKoupit" to close then run "hodnostzvyseni %player% 50 Delnik"    
+          else:
+            format slot 3 of player with 1 of Book named "  &6&l>> &eHodnost &6&l<<" with lore "        &bDelnik||    &aCena: &e5.000" to be unstealable 
+      else:
+        format slot 3 of player with 1 of Book named "  &6&l>> &eHodnost &6&l<<" with lore "        &bDelnik||    &aCena: &e5.000" to be unstealable
+
+      if player has permission "rank.permise.delnik":
+        if player has permission "rank.permise.manager":
+          format slot 4 of player with 1 of Enchanted Book named "  &6&l>> &eHodnost &6&l<<" with lore "      &bManager||      &2Dosazeno" to be unstealable 
+        else:
+          if player's money is greater than or equal to 20000:
+            format slot 4 of player with 1 of Book and Quill named "  &6&l>> &eHodnost &6&l<<" with lore "      &bManager||       &a&lKoupit" to close then run "hodnostzvyseni %player% 50 Manager"   
+          else:
+            format slot 4 of player with 1 of Book named "  &6&l>> &eHodnost &6&l<<" with lore "      &bManager||   &aCena: &e20.000" to be unstealable 
+      else:
+        format slot 4 of player with 1 of Book named "  &6&l>> &eHodnost &6&l<<" with lore "      &bManager||   &aCena: &e20.000" to be unstealable
+
+      if player has permission "rank.permise.manager":
+        if player has permission "rank.permise.mayor":
+          format slot 5 of player with 1 of Enchanted Book named "  &6&l>> &eHodnost &6&l<<" with lore "        &bMayor||      &2Dosazeno" to be unstealable 
+        else:
+          if player's money is greater than or equal to 50000:
+            format slot 5 of player with 1 of Book and Quill named "  &6&l>> &eHodnost &6&l<<" with lore "        &bMayor||       &a&lKoupit" to close then run "hodnostzvyseni %player% 50 Mayor"   
+          else:
+            format slot 5 of player with 1 of Book named "  &6&l>> &eHodnost &6&l<<" with lore "        &bMayor||    &aCena: &e50.000" to be unstealable 
+      else:
+        format slot 5 of player with 1 of Book named "  &6&l>> &eHodnost &6&l<<" with lore "        &bMayor||    &aCena: &e50.000" to be unstealable
+
+      if player has permission "rank.permise.mayor":
+        if player has permission "rank.permise.senator":
+          format slot 6 of player with 1 of Enchanted Book named "  &6&l>> &eHodnost &6&l<<" with lore "       &bSenator||      &2Dosazeno" to be unstealable 
+        else:
+          if player's money is greater than or equal to 100000:
+            format slot 6 of player with 1 of Book and Quill named "  &6&l>> &eHodnost &6&l<<" with lore "      &bSenator||       &a&lKoupit" to close then run "hodnostzvyseni %player% 50 Senator"   
+          else:
+            format slot 6 of player with 1 of Book named "  &6&l>> &eHodnost &6&l<<" with lore "      &bSenator||   &aCena: &e100.000" to be unstealable 
+      else:
+        format slot 6 of player with 1 of Book named "  &6&l>> &eHodnost &6&l<<" with lore "      &bSenator||   &aCena: &e100.000" to be unstealable
+      format slot 7 of player with 1 of Cobweb named " " to be unstealable
+      format slot 8 of player with 1 of Cobweb named " " to be unstealable
+      
+
+command /hodnostzvyseni <text> <text> <text>:
+  executable by: console
+  trigger:
+    message "%arg 1% %arg 2% %arg 3%"
+    execute console command "money take %arg 1% %arg 2%"
+    execute console command "pex user %arg 1% group set %arg 3%"
